@@ -89,6 +89,9 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     }
 
     public ListaEnlazada(ListaEnlazada<T> lista) {
+        for (int n = 0; n < lista.largo ; n++){
+            this.agregarAtras(lista.obtener(n));
+        }
     }
     
     @Override
