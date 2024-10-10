@@ -1,37 +1,83 @@
 package aed;
 
-import java.util.*;
-
 public class ListaEnlazada<T> implements Secuencia<T> {
-    // Completar atributos privados
+    private Nodo primero;
+    private Nodo ultimo;
+    private int largo;
 
     private class Nodo {
-        // Completar
+        T valor;
+        Nodo siguiente;
+        Nodo anterior;
+        Nodo(T v) { this.valor = v; }
     }
 
     public ListaEnlazada() {
-        throw new UnsupportedOperationException("No implementada aun");
+        this.primero= new Nodo(null);
+        this.ultimo = new Nodo(null);
+        this.largo = 0;
     }
 
     public int longitud() {
-        throw new UnsupportedOperationException("No implementada aun");
+       return this.largo;
     }
 
     public void agregarAdelante(T elem) {
-        throw new UnsupportedOperationException("No implementada aun");
+        Nodo nodoNuevo = new Nodo(elem);
+        if (this.largo == 0){
+            this.primero = nodoNuevo;
+            this.ultimo = nodoNuevo;
+        }else{
+            this.primero.anterior = nodoNuevo;
+            nodoNuevo.siguiente = this.primero;
+            this.primero = nodoNuevo;
+        }
+        this.largo += 1;
     }
 
     public void agregarAtras(T elem) {
-        throw new UnsupportedOperationException("No implementada aun");
+        Nodo nodoNuevo = new Nodo(elem);
+        if (this.largo == 0){
+            this.primero = nodoNuevo;
+            this.ultimo = nodoNuevo;
+        }else{
+            this.ultimo.siguiente = nodoNuevo;
+            nodoNuevo.anterior = this.ultimo;
+            nodoNuevo.siguiente= new Nodo (null);
+            this.ultimo = nodoNuevo;
+        }
+        this.largo += 1;
     }
 
     public T obtener(int i) {
-        throw new UnsupportedOperationException("No implementada aun");
+        Nodo apuntado = primero;
+        for (int j = 0; j< i; j++){
+            apuntado = apuntado.siguiente;
+        }
+        return apuntado.valor;
     }
 
     public void eliminar(int i) {
-        throw new UnsupportedOperationException("No implementada aun");
+        int contador = 0;
+        Nodo apuntado = primero;
+        if(i == 0){
+            this.primero = apuntado.siguiente;
+        } else if (i==this.largo){
+            while(apuntado.siguiente != null){
+                apuntado = apuntado.siguiente;
+            }
+            apuntado.anterior.siguiente = null;
+        } else {
+            while (contador != i){
+                apuntado = apuntado.siguiente;
+                contador = contador + 1;
+            }
+            apuntado.anterior.siguiente = apuntado.siguiente;
+            apuntado.siguiente.anterior = apuntado.anterior;
+        }
+        largo = largo - 1;
     }
+    
 
     public void modificarPosicion(int indice, T elem) {
         throw new UnsupportedOperationException("No implementada aun");
