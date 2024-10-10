@@ -75,12 +75,12 @@ public class ListaEnlazada<T> implements Secuencia<T> {
             apuntado.anterior.siguiente = apuntado.siguiente;
             apuntado.siguiente.anterior = apuntado.anterior;
         }
-        largo = largo - 1;
+        largo -= 1;
     }
     
 
     public void modificarPosicion(int indice, T elem) {
-        throw new UnsupportedOperationException("No implementada aun");
+    
     }
 
     public ListaEnlazada(ListaEnlazada<T> lista) {
