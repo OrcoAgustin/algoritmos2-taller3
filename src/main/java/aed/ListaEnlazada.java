@@ -76,8 +76,7 @@ public class ListaEnlazada<T> implements Secuencia<T> {
             apuntado.siguiente.anterior = apuntado.anterior;
         }
         largo -= 1;
-    }
-    
+    } 
 
     public void modificarPosicion(int indice, T elem) {
         Nodo apuntado = primero;
@@ -96,32 +95,41 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("No implementada aun");
+        String lista = "[";
+        for (int n = 0; n < this.largo - 1; n++){
+            lista = lista + this.obtener(n) + ", ";
+        }
+        return lista + this.ultimo.valor + "]";
     }
 
     private class ListaIterador implements Iterador<T> {
-    	// Completar atributos privados
+    	ListaEnlazada<T> lista;
+        int puntero ; 
 
         public boolean haySiguiente() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        return puntero !=  lista.largo;
         }
         
         public boolean hayAnterior() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        return puntero !=  0;
         }
 
         public T siguiente() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        puntero ++;
+            return lista.obtener(puntero - 1);
         }
         
 
         public T anterior() {
-	        throw new UnsupportedOperationException("No implementada aun");
+	        puntero --;
+            return lista.obtener(puntero);
         }
     }
 
     public Iterador<T> iterador() {
-	    throw new UnsupportedOperationException("No implementada aun");
+        ListaIterador iterador = new ListaIterador();  
+        iterador.lista = this;  
+        return iterador;
     }
 
 }
