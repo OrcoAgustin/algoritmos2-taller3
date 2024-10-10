@@ -80,11 +80,15 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     
 
     public void modificarPosicion(int indice, T elem) {
-    
+        Nodo apuntado = primero;
+        Nodo nodoNuevo = new Nodo(elem);
+        for (int n=0; n<indice; n++){
+            apuntado = apuntado.siguiente;
+        }
+        apuntado.valor = nodoNuevo.valor;
     }
 
     public ListaEnlazada(ListaEnlazada<T> lista) {
-        throw new UnsupportedOperationException("No implementada aun");
     }
     
     @Override
